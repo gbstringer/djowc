@@ -1,6 +1,25 @@
+{% extends 'books/base.html' %}
+
+{% block pagetitle %}
+	OWC :: {{ book.book_title }} ({{ book.volume_num}})
+{% endblock %}
+
+{% block content %}
 <h1>{{ book.book_title }}</h1>
 <ul>
 {% for edition in book.edition_set.all %}
-    <li>{{ edition.year }}, {{ edition.book.book_title }}</li>
+    <li>{{ edition.year }}, {{ edition.book.book_title }}
+    	<ul>
+    	{% if edition.instance_set.all %}
+    	{% for instance in edition.instance_set.all %}
+    		<li>{{ instance.condition }}</li>
+    	
+    	{% endfor %}
+    	{% else %}
+    		<li>No copies of this item in collection</li>
+    	{% endif %}
+    	</ul>
+    </li>
 {% endfor %}
 </ul>
+{% endblock %}

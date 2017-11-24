@@ -25,12 +25,12 @@ class Edition(models.Model):
     year = models.IntegerField()
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     def __str__(self):
-        return self.book.__str__()+'('+str(self.year)+')'
+        return self.book.__str__()+' ('+str(self.year)+')'
     
 class Instance(models.Model):
     condition = models.CharField(max_length=64)
     price = models.FloatField(default=0.00)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
     def __str__(self):
-        return self.condition
+        return self.edition.__str__()+' ('+self.condition+', GBP '+str(self.price)+')'
     
