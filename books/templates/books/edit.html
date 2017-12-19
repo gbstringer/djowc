@@ -1,0 +1,22 @@
+{% extends 'books/base.html' %}
+
+{% block pagetitle %}
+	OWC :: {{ book.title }} ({{ book.volume}})
+{% endblock %}
+
+{% block content %}
+<h1>{{ book.title }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+<form action="{% url 'books:edit' book.id %}" method="post">
+{% csrf_token %}
+<p><label for="title">Title: </label>
+<input type="text" name="title" id="title" value="{{ book.title }}" /></p>
+<p><label for="volume">Volume number: </label>
+<input type="text" name="volume" id="volume" value="{{ book.volume }}" /></p>
+<p><input type="submit" value="Change" /></p>
+</form>
+
+{% endblock %}

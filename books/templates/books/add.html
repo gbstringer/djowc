@@ -1,0 +1,17 @@
+{% extends 'books/base.html' %}
+
+{% block pagetitle %}
+	OWC :: add new book
+{% endblock %}
+
+{% block content %}
+<h3>Add a new volume</h3>
+
+<form action="/book/add/" method="POST">
+	<div class="form-group">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Add" />
+	</div>
+</form>
+{% endblock %}

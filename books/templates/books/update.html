@@ -1,0 +1,17 @@
+{% extends 'books/base.html' %}
+
+{% block pagetitle %}
+	OWC :: {{ book.title }} ({{ book.volume}}) :: update
+{% endblock %}
+
+{% block content %}
+<h1>Update {{book.title}} ({{book.volume}})</h1>
+
+<form action="/book/" method="post">
+    <div class="form-group">
+	{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+    </div>
+</form>
+{% endblock %}
