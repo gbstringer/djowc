@@ -19,7 +19,7 @@
         <tr>
         	<td style="text-align: right">{{book.volume}}</td>
         	<td><a href="{% url 'books:detail' book.id %}">{{ book.title }}</a></td>
-        	<td><a href="#">[{{book.person}}]</a></td>
+        	<td><a href="#">[{{book.}}]</a></td>
         	<td><a href="{% url 'books:edit' book.id %}">edit</a> | 
         	<a href="{% url 'books:update' book.id %}">update</a></td>
         </tr>

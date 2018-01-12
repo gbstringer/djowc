@@ -8,7 +8,7 @@ from .models import Book
 from .forms import BookForm
 
 def index(request):
-    latest_book_list = Book.objects.order_by('title')[:5]
+    latest_book_list = Book.objects.order_by('title')[:20]
     context = {'latest_book_list': latest_book_list}
     return render(request, 'books/index.html', context)
 
@@ -44,7 +44,8 @@ class AddBookView(View):
             if form.is_valid(): 
                 newbook = Book(title=request.POST['title'], volume=request.POST['volume'])
                 newbook.save()
-                return HttpResponse('form valid: '+newbook.title)
+                return HttpResponseRedirect('/book/')
+                #return reverse('books:index')
         else:
             form=BookForm()
             
