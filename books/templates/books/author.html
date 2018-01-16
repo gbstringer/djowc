@@ -1,0 +1,11 @@
+{% extends 'books/base.html' %}
+
+{% block pagetitle %}
+	OWC :: {{ author.lastname }}, {{ author.firstname }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ author.lastname }}, {{ author.firstname }}</h1>
+
+
+{% endblock %}

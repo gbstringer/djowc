@@ -1,10 +1,10 @@
-from django.http import Http404,HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views import View 
 from django.urls import reverse
 # Create your views here.
 
-from .models import Book
+from .models import Book, BookPerson, Person
 from .forms import BookForm
 
 def index(request):
@@ -12,10 +12,24 @@ def index(request):
     context = {'latest_book_list': latest_book_list}
     return render(request, 'books/index.html', context)
 
+
+'''
 def detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     return render(request, 'books/detail.html', {'book': book})
+'''
 
+class DetailView(View):
+    def get(self, request, book_id):
+        book = get_object_or_404(Book, pk=book_id)
+        # return render(request, 'books/detail.html' ,{'book': book})
+        return render(request, 'books/detail.html' ,{'book': book})
+
+    
+class AuthorView(View):
+    def get(self, request, person_id):
+        author = get_object_or_404(Person, pk=person_id)
+        return render(request, 'books/author.html', {'author':author})
 '''
 def add(request):
     if request.method == 'POST':
@@ -33,6 +47,17 @@ def add(request):
         
     return render(request,'books/add.html', {'form': form})
 '''
+
+'''
+def authors(request):
+    author_list = Person.objects.order_by('lastname')[:20]
+    return render(request, 'books/authors.html',{'author_list': author_list})
+'''
+
+class ListAuthorView(View):
+    def get(self, request):
+        author_list = Person.objects.all()
+        return render(request, 'books/authors.html' ,{'author_list': author_list})
 
 class AddBookView(View):
     def get(self, request):
@@ -58,6 +83,25 @@ def edit(request, book_id):
     new_title = book.title.get(pk=request.POST['title'])
     new_title.save()
     return render(request, 'books/edit.html', {'book': book})
+
+def updateauthor(request, person_id):
+    author = get_object_or_404(Person, pk=person_id)
+    new_firstname = author.firstname.get(pk=request.POST['firstname'])
+    new_lastname = author.lastname.get(pk=request.POST['lastname'])
+    new_firstname.save()
+    new_lastname.save()
+    return render(request, 'books/updateauthor.html', {'author': author})
+
+class UpdateAuthorView(View):
+    def get(self, request, person_id):
+        author = get_object_or_404(Person, pk=person_id)
+        new_firstname = author.firstname.get(pk=request.POST['firstname'])
+        new_lastname = author.lastname.get(pk=request.POST['lastname'])
+        new_firstname.save()
+        new_lastname.save()
+        return render(request, 'books/updateauthor.html', {'author': author})
+
+
 '''    
 
 def update(request,book_id):

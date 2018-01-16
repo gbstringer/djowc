@@ -14,14 +14,13 @@
     		<th></th>
     		<th></th>
     	</tr>
-    {% for book in latest_book_list %}
-        
+    {% for thisbook in latest_book_list %}
         <tr>
-        	<td style="text-align: right">{{book.volume}}</td>
-        	<td><a href="{% url 'books:detail' book.id %}">{{ book.title }}</a></td>
-        	<td><a href="#">[{{book.}}]</a></td>
-        	<td><a href="{% url 'books:edit' book.id %}">edit</a> | 
-        	<a href="{% url 'books:update' book.id %}">update</a></td>
+        	<td style="text-align: right">{{thisbook.volume}}</td>
+        	<td><a href="{% url 'books:detail' thisbook.id %}">{{ thisbook.title }}</a></td>
+        	<td><a href="#">[{#{ thisbook.) }}]</a></td>
+        	<td><a href="{% url 'books:edit' thisbook.id %}">edit</a> | 
+        	<a href="{% url 'books:update' thisbook.id %}">update</a></td>
         </tr>
     {% endfor %}
     </table>

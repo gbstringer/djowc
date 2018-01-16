@@ -1,0 +1,28 @@
+{% extends 'books/base.html' %}
+
+{% block pagetitle %}
+	OWC :: Index of People
+{% endblock %}
+
+{% block content %}
+{% if author_list %}
+    <table >
+    	<tr>
+    		<th>Author</th>
+    		<th></th>
+    		<th></th>
+    	</tr>
+    {% for this_author in author_list %}
+        <tr>
+        	<td>{{this_author.firstname}}</td>
+        	<td><a href="{% url 'books:author' this_author.id %}">{{ this_author.lastname }}</a></td>
+        	<td><a href="{% url 'books:updateauthor' this_author.id %}">update</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No books are available.</p>
+{% endif %}
+
+<p>Add a <a href="{% url 'books:add' %}">new book</a></p>
+{% endblock %}

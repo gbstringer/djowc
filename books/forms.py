@@ -13,3 +13,11 @@ class BookForm(forms.Form):
     volume=forms.IntegerField(max_value=999, min_value=1, widget=forms.NumberInput(attrs={'class': 'form-control'}))
     
     
+class AuthorForm(forms.Form):
+    firstname = forms.CharField(label='First Name',
+                                max_length=63,
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    lastname = forms.CharField(label='Last Name',
+                                max_length=63,
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    

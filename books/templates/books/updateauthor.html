@@ -1,11 +1,11 @@
 {% extends 'books/base.html' %}
 
 {% block pagetitle %}
-	OWC :: {{author.lastname}}, ({{author.firstname}}) :: update
+	OWC :: {{ book.title }} ({{ book.volume}}) :: update
 {% endblock %}
 
 {% block content %}
-<h1>Update {{author.lastname}}, ({{author.firstname}})</h1>
+<h1>Update {{book.title}} ({{book.volume}})</h1>
 
 <form action="/book/" method="post">
     <div class="form-group">
