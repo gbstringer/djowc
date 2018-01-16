@@ -6,7 +6,7 @@ Created on 23 Nov 2017
 from django.conf.urls import url
 
 from . import views
-from books.views import AddBookView, DetailView, AuthorView, ListAuthorView, UpdateAuthorView
+from books.views import AddBookView, DetailView, AuthorView, ListAuthorView, UpdateAuthorView, AddAuthorView
 
 
 app_name = 'books'
@@ -24,8 +24,8 @@ urlpatterns = [
 
     url(r'^authors/$',ListAuthorView.as_view(), name='authors'),
     url(r'^author/(?P<person_id>[0-9]+)/$', AuthorView.as_view(), name='author'),
-    url(r'^author/(?P<person_id>[0-9]+)/update/',UpdateAuthorView.as_view(), name='updateauthor'),
-
+    url(r'^author/(?P<person_id>[0-9]+)/update/$',UpdateAuthorView.as_view(), name='updateauthor'),
+    url(r'^author/add/$', AddAuthorView.as_view(), name='addauthor'),
 
 
 #    url(r'^add/$', views.add, name='add'),
