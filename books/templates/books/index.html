@@ -5,22 +5,28 @@
 {% endblock %}
 
 {% block content %}
-{% if latest_book_list %}
+{% if book_list %}
     <table >
     	<tr>
     		<th>Vol.</th>
     		<th>Title</th>
     		<th>Author</th>
-    		<th></th>
-    		<th></th>
+    		<th span="2">Actions</th>
+    		
     	</tr>
-    {% for thisbook in latest_book_list %}
+    {% for this_book in book_list %}
         <tr>
-        	<td style="text-align: right">{{thisbook.volume}}</td>
-        	<td><a href="{% url 'books:detail' thisbook.id %}">{{ thisbook.title }}</a></td>
-        	<td><a href="#">[{#{ thisbook.) }}]</a></td>
-        	<td><a href="{% url 'books:edit' thisbook.id %}">edit</a> | 
-        	<a href="{% url 'books:update' thisbook.id %}">update</a></td>
+        	<td style="text-align: right">{{this_book.volume}}</td>
+        	<td><a href="{% url 'books:detail' this_book.id %}">{{ this_book.title }}</a></td>
+        	{% if person_list %}
+        		{% for this_person in person_list %}
+        			<td><a href="#">{{this_person.person}}</a></td>
+        		{% endfor %}
+        	{% else %}
+        		<td>none</td>
+        	{% endif %}
+        	<td><a href="{% url 'books:edit' this_book.id %}">edit</a> | 
+        	<a href="{% url 'books:update' this_book.id %}">update</a></td>
         </tr>
     {% endfor %}
     </table>

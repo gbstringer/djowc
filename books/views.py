@@ -2,22 +2,20 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views import View 
 from django.urls import reverse
-# Create your views here.
 
 from .models import Book, BookPerson, Person
 from .forms import BookForm, AuthorForm
 
 def index(request):
-    latest_book_list = Book.objects.order_by('title')[:20]
-    context = {'latest_book_list': latest_book_list}
+    book_list = Book.objects.order_by('title')
+    person_list = BookPerson.objects.filter(role='author')
+    context = {'book_list': book_list, 'person_list': person_list}
     return render(request, 'books/index.html', context)
 
 class DetailView(View):
     def get(self, request, book_id):
         book = get_object_or_404(Book, pk=book_id)
-        # return render(request, 'books/detail.html' ,{'book': book})
         return render(request, 'books/detail.html' ,{'book': book})
-
     
 class AuthorView(View):
     def get(self, request, person_id):
@@ -79,10 +77,6 @@ class UpdateAuthorView(View):
         new_firstname.save()
         new_lastname.save()
         return render(request, 'books/updateauthor.html', {'author': author})
-
-
-   
-   
    
 def update(request,book_id):
     form = BookForm()
